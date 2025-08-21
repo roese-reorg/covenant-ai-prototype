@@ -1,31 +1,59 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import SharedNavigation from './components/SharedNavigation'
 import SharedTopBar from './components/SharedTopBar'
 
 export default function App() {
+  // Landing page uses its own navigation state - keeps it exactly as it was
+  const [isNavExpanded, setIsNavExpanded] = useState(true)
+  const [intelExpanded, setIntelExpanded] = useState(true)
+  const [covenantsExpanded, setCovenantsExpanded] = useState(false)
+  const [sourceFilesExpanded, setSourceFilesExpanded] = useState(false)
+  const [companiesExpanded, setCompaniesExpanded] = useState(false)
+  const [creditCloudExpanded, setCreditCloudExpanded] = useState(false)
+  const [findoxExpanded, setFindoxExpanded] = useState(false)
+  const [resourcesExpanded, setResourcesExpanded] = useState(false)
+
   return (
-    <div className="min-h-dvh flex bg-[#EFF0FF]">
+    <div className="h-screen flex bg-[#EFF0FF] overflow-hidden">
       {/* Left Navigation Sidebar */}
-      <SharedNavigation />
+      <SharedNavigation 
+        isNavExpanded={isNavExpanded}
+        setIsNavExpanded={setIsNavExpanded}
+        intelExpanded={intelExpanded}
+        setIntelExpanded={setIntelExpanded}
+        covenantsExpanded={covenantsExpanded}
+        setCovenantsExpanded={setCovenantsExpanded}
+        sourceFilesExpanded={sourceFilesExpanded}
+        setSourceFilesExpanded={setSourceFilesExpanded}
+        companiesExpanded={companiesExpanded}
+        setCompaniesExpanded={setCompaniesExpanded}
+        creditCloudExpanded={creditCloudExpanded}
+        setCreditCloudExpanded={setCreditCloudExpanded}
+        findoxExpanded={findoxExpanded}
+        setFindoxExpanded={setFindoxExpanded}
+        resourcesExpanded={resourcesExpanded}
+        setResourcesExpanded={setResourcesExpanded}
+      />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden h-full">
         {/* Top Bar */}
         <SharedTopBar />
 
         {/* Main Content */}
-        <div className="flex-1 flex">
+        <div className="flex-1 flex overflow-hidden h-0">
           {/* Left Panel - Conversations */}
-          <div className="w-80 bg-black border-r border-black/10 p-3">
+          <div className="w-80 bg-black border-r border-black/10 p-3 flex flex-col overflow-hidden h-full">
             <Link
               to="/cov-ai"
-              className="w-full bg-primary-600 hover:bg-primary-700 px-3 py-2 text-sm font-medium text-white shadow-none block text-center"
+              className="w-full bg-primary-600 hover:bg-primary-700 px-3 py-2 text-sm font-medium text-white shadow-none block text-center flex-shrink-0"
             >
               NEW CONVERSATION
             </Link>
-            <div className="mt-0 flex-1 bg-black p-3 text-white flex flex-col overflow-hidden">
-              <div className="text-xs uppercase text-white/60">Recent Conversations</div>
-              <div className="mt-2 space-y-1 pr-1">
+            <div className="mt-0 flex-1 bg-black p-3 text-white flex flex-col overflow-hidden h-0">
+              <div className="text-xs uppercase text-white/60 flex-shrink-0">Recent Conversations</div>
+              <div className="mt-2 space-y-1 pr-1 overflow-y-auto flex-1">
                 {/* September 1st, 2024 */}
                 <div className="text-xs text-white/40 mt-3 mb-2">September 1st, 2024</div>
                 {[
@@ -35,7 +63,7 @@ export default function App() {
                 ].map((label, i) => (
                   <div
                     key={i}
-                    className="rounded-md px-3 py-2 text-sm flex items-center gap-2 hover:bg-white/10 cursor-pointer"
+                    className="rounded-block px-3 py-2 text-sm flex items-center gap-2 hover:bg-white/10 cursor-pointer"
                   >
                     <span className="inline-block text-[10px] leading-none text-[#FFDC61]">▶</span>
                     <span className="line-clamp-2">{label}</span>
@@ -51,7 +79,7 @@ export default function App() {
                 ].map((label, i) => (
                   <div
                     key={i}
-                    className="rounded-md px-3 py-2 text-sm flex items-center gap-2 hover:bg-white/10 cursor-pointer"
+                    className="rounded-block px-3 py-2 text-sm flex items-center gap-2 hover:bg-white/10 cursor-pointer"
                   >
                     <span className="inline-block text-[10px] leading-none text-[#FFDC61]">▶</span>
                     <span className="line-clamp-2">{label}</span>
@@ -62,178 +90,65 @@ export default function App() {
           </div>
 
           {/* Right Panel - Landing Page Content */}
-          <div className="flex-1 flex justify-center px-3 sm:px-6">
+          <div className="flex-1 flex justify-center px-3 sm:px-6 overflow-y-auto h-full">
             <div className="w-full max-w-4xl rounded-2xl flex flex-col min-h-0 mt-6">
-              <div className="flex-1 p-4 sm:p-6 space-y-6 overflow-auto min-h-0">
+              <div className="flex-1 p-4 sm:p-6 space-y-6">
                 {/* Main Title and Description */}
                 <div className="text-center">
-                  <h1 className="text-4xl font-bold text-gray-800 mb-6">CovenantAI by Octus™</h1>
-                  <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    Powered by CreditAI, CovenantAI delivers advanced agentic AI for covenant analysis, 
-                    leveraging our <strong>vast repository</strong> of credit agreements and market intelligence. 
-                    <strong>Instantly surface</strong> <strong>deal specific details</strong> through 
-                    <strong>exhaustive searches</strong> across thousands of documents, enhanced by 
-                    <strong>sophisticated reasoning frameworks</strong> that provide 
-                    <strong>full traceability</strong> to source materials. Access 
-                    <strong>real-world, market-tested examples</strong> and comprehensive analysis all from 
-                    <strong>one centralized platform</strong>.
+                  <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                    CovenantAI by Octus™
+                  </h1>
+                  <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Transform your covenant analysis with AI-powered insights. Get instant answers to complex questions, 
+                    analyze documents in seconds, and make informed decisions with confidence.
                   </p>
                 </div>
 
                 {/* See What's Possible Section */}
-                <div className="mt-12">
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">See What's Possible</h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Find Comparable Deals */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Find Comparable Deals</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">Which deals have been sponsored by KKR?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">Which transactions had a deal size between $500 million and $1 billion?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Risk Assessment */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Risk Assessment</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">What is the potential for LME style maneuvers for Presidio?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">Are there any new types of springing maturities that could increase refinancing risk?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Covenant Trends Analysis */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Covenant Trends Analysis</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">What has changed in recent years with respect to the ratio-based investment basket?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">How common are J-Crew blockers in the European leveraged loans market?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Deal Analysis */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Deal Analysis</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">In McAfee, what amendments require affected lender consent?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">How could lenders strengthen lender protection from priming transactions in Asurion?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Clause Comparison & Precedent Retrieval */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Clause Comparison & Precedent Retrieval</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">Are there any precedent clauses for change of control provisions?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">How does the J-Crew blocker differ between McAfee and Vapeth? Provide drafting for a standard J-Crew Blocker.</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Provision Search across Agreements */}
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Provision Search across Agreements</h3>
-                      <div className="space-y-3">
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">Which credit agreements have a Serta blocker?</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                        <Link
-                          to="/cov-ai"
-                          className="block w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg flex items-center justify-between transition-colors"
-                        >
-                          <span className="text-sm">List agreements that are cov lite.</span>
-                          <i className="bi bi-arrow-right"></i>
-                        </Link>
-                      </div>
-                    </div>
+                <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">See What's Possible</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      'Analyze covenant compliance across multiple documents',
+                      'Compare terms and conditions between different agreements',
+                      'Identify potential risks and red flags in contracts',
+                      'Generate summary reports for stakeholder presentations',
+                      'Answer complex legal and financial questions instantly',
+                      'Track changes and amendments across document versions'
+                    ].map((query, index) => (
+                      <Link
+                        key={index}
+                        to="/cov-ai"
+                        className="block p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors text-left group"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                            <i className="bi bi-lightbulb text-blue-600 text-sm"></i>
+                          </div>
+                          <p className="text-gray-700 group-hover:text-gray-900 transition-colors">
+                            {query}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Bottom Search Bar */}
-              <div className="bg-gray-800 p-4 rounded-b-2xl">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <select className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm border border-gray-600">
-                      <option>CovenantAI</option>
-                    </select>
-                    <i className="bi bi-chevron-down text-gray-400"></i>
+                {/* Bottom Search Bar */}
+                <div className="bg-white rounded-2xl p-6 shadow-sm">
+                  <div className="max-w-2xl mx-auto">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Ask CovenantAI anything..."
+                        className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                      <i className="bi bi-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+                      <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ask
+                      </button>
+                    </div>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Ask me something!"
-                    className="flex-1 bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-purple-500"
-                  />
-                  <div className="text-gray-400 text-sm">0/500</div>
-                </div>
-                <div className="mt-2 text-xs text-gray-400">
-                  Answers are generated by CreditAI and should not be considered advice or guidance, 
-                  <a href="#" className="text-blue-400 hover:underline"> complete information here</a>. 
-                  Need help crafting questions? <a href="#" className="text-blue-400 hover:underline">Click here for Tips & Tricks</a>.
                 </div>
               </div>
             </div>

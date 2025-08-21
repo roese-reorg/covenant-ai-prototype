@@ -1,19 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
+import { NavigationProvider } from './contexts/NavigationContext'
 import './index.css'
-import App from './App.tsx'
-import NewsPage from './news/NewsPage.tsx'
-import CovenantAIPage from './cov-ai/CovenantAIPage.tsx'
 
-const router = createBrowserRouter([
-  { path: '/', element: <App /> },
-  { path: '/intel', element: <NewsPage /> },
-  { path: '/cov-ai', element: <CovenantAIPage /> },
-])
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <NavigationProvider>
+      <RouterProvider router={router} />
+    </NavigationProvider>
+  </React.StrictMode>,
 )
