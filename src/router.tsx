@@ -5,6 +5,7 @@ import CovenantAIPage from './cov-ai/CovenantAIPage.tsx'
 import PrivateCreditPage from './private-credit/PrivateCreditPage.tsx'
 import CreditCloudPipelinePage from './locked/CreditCloudPipelinePage.tsx'
 import PortfolioAnalyticsPage from './locked/PortfolioAnalyticsPage.tsx'
+import LevFinPage from './levfin/LevFinPage.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -30,5 +31,9 @@ export const router = createBrowserRouter([
   {
     path: '/portfolio-analytics',
     element: <PortfolioAnalyticsPage />,
+  },
+  {
+    path: '/levfin',
+    element: <LevFinPage />,
   },
 ])
